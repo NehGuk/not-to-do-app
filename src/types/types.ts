@@ -1,6 +1,6 @@
-export type Todo = {
-  title: string
+export type Task = {
+  name: string
+  timestamp: Date
   completed: boolean
-  created_at: Date
-  id: number
+  id: string
 }
