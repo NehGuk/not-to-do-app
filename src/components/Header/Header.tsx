@@ -4,7 +4,6 @@ export default function Header() {
       <h1>Header</h1>
       <input type="text" />
       <button>Add</button>
-      <h2>filters</h2>
     </header>
   )
 }

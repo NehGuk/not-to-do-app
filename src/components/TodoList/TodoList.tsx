@@ -1,9 +1,8 @@
-import TodoItem from "./TodoItem"
+import TodoItem from "../TodoItem/TodoItem"
 
 export default function TodoList() {
   return (
     <div>
-      <p>here's the todo list</p>
       <TodoItem />
       <TodoItem />
       <TodoItem />
