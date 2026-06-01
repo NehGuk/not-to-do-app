@@ -1,17 +1,19 @@
-export default function TodoItem({ data: { task } }) {
+export default function TodoItem({ data: { task, editTask, deleteTask } }) {
   const toggleCompleted = () => {}
-  const handleEditTask = (e) => {
-    e.preventDefault()
-    task.name = e.target.value
+
+  const handleEdit = () => {}
+
+  const handleDelete = (id) => {
+    deleteTask(id)
   }
 
   return (
     <li>
       <form>
         <input type="checkbox" checked={task.completed} onChange={toggleCompleted} />
-        <input type="text" defaultValue={task.name} readOnly />
-        <button onClick={handleEditTask}>Edit</button>
-        <button>Delete</button>
+        <input type="text" defaultValue={task.name} />
+        <button onClick={handleEdit}>Edit</button>
+        <button onClick={() => handleDelete(task.id)}>Delete</button>
       </form>
     </li>
   )

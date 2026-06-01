@@ -9,11 +9,18 @@ export default function App() {
     setTodoData((prev) => [...prev, newTask])
     console.log(todoData)
   }
+  const deleteTask = (id: string) => {
+    setTodoData((prev) => prev.filter((task) => task.id !== id))
+  }
+
+  const editTask = (id: string, updatedTask: Task) => {
+    setTodoData((prev) => prev.map((task) => (task.id === id ? { ...task, updatedTask } : task)))
+  }
 
   return (
     <>
       <Header data={{ addTask }} />
-      <TodoList data={{ todoData }} />
+      <TodoList data={{ todoData, deleteTask, editTask }} />
     </>
   )
 }

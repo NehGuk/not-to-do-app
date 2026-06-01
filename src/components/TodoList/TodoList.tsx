@@ -1,7 +1,7 @@
 /* import type { Task } from "../../types/types" */
 import TodoItem from "../TodoItem/TodoItem"
 
-export default function TodoList({ data: { todoData } }) {
+export default function TodoList({ data: { todoData, deleteTask, editTask } }) {
   if (todoData.length === 0) {
     return <p>No tasks.</p>
   }
@@ -9,7 +9,7 @@ export default function TodoList({ data: { todoData } }) {
   return (
     <ul>
       {todoData.map((task) => {
-        return <TodoItem key={task.id} data={{ task }} />
+        return <TodoItem key={task.id} data={{ task, deleteTask, editTask }} />
       })}
     </ul>
   )
