@@ -7,6 +7,7 @@ export default function Header({ data: { addTask } }) {
 
   const handleAddTask = (e) => {
     e.preventDefault()
+
     const newTask: Task = {
       name: newTaskName,
       timestamp: new Date(),

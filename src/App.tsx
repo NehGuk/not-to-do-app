@@ -14,7 +14,7 @@ export default function App() {
   }
 
   const editTask = (id: string, updatedTask: Task) => {
-    setTodoData((prev) => prev.map((task) => (task.id === id ? { ...task, updatedTask } : task)))
+    setTodoData((prev) => prev.map((task) => (task.id === id ? { ...task, ...updatedTask } : task)))
   }
 
   return (
