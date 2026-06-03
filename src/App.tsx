@@ -1,11 +1,21 @@
 import Header from "./components/Header/Header"
 import TodoList from "./components/TodoList/TodoList"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import type { Task } from "./types/types"
 
 export default function App() {
-  const [todoData, setTodoData] = useState<Task[]>([])
-  const [sortOption, setSortOption] = useState({ sortBy: "Newest first", hideCompleted: false })
+  const [todoData, setTodoData] = useState<Task[]>(() => {
+    const savedData = localStorage.getItem("todoData")
+    return savedData ? JSON.parse(savedData).map((task) => ({ ...task, timestamp: new Date(task.timestamp) })) : []
+  })
+  const [sortOption, setSortOption] = useState(
+    () => {
+      const savedSort = localStorage.getItem("sortOption")
+      return JSON.parse(savedSort) || { sortBy: "newest-first", hideCompleted: false }
+    }
+
+    /*   { sortBy: "Newest first", hideCompleted: false } */
+  )
   const addTask = (newTask: Task) => {
     setTodoData((prev) => [...prev, newTask])
     console.log(todoData)
@@ -32,6 +42,11 @@ export default function App() {
           return b.timestamp - a.timestamp
       }
     })
+
+  useEffect(() => {
+    localStorage.setItem("todoData", JSON.stringify(todoData))
+    localStorage.setItem("sortOption", JSON.stringify(sortOption))
+  }, [todoData, sortOption])
 
   return (
     <>
