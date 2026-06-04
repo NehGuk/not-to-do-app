@@ -1,4 +1,5 @@
 import type { Task } from "../../types/types"
+import type { MouseEvent } from "react"
 import { useState } from "react"
 import { v4 as uuidv4 } from "uuid"
 import { useContext } from "react"
@@ -9,7 +10,7 @@ export default function Header() {
 
   const [newTaskName, setNewTaskName] = useState("")
 
-  const handleAddTask = (e) => {
+  const handleAddTask = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
 
     const newTask: Task = {
