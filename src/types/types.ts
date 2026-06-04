@@ -4,3 +4,12 @@ export type Task = {
   completed: boolean
   id: string
 }
+
+export type TaskContextType = {
+  addTask: (newTask: Task) => void
+  deleteTask: (id: string) => void
+  editTask: (id: string, updatedTask: Task) => void
+  sortedData: Task[]
+  sortOption: { sortBy: string; hideCompleted: boolean }
+  setSortOption: (option: { sortBy: string; hideCompleted: boolean }) => void
+}

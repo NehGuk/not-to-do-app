@@ -1,8 +1,12 @@
 import type { Task } from "../../types/types"
 import { useState } from "react"
 import { v4 as uuidv4 } from "uuid"
+import { useContext } from "react"
+import { TaskContext } from "../../App"
 
-export default function Header({ data: { addTask, sortOption, setSortOption } }) {
+export default function Header() {
+  const { addTask, sortOption, setSortOption } = useContext(TaskContext)
+
   const [newTaskName, setNewTaskName] = useState("")
 
   const handleAddTask = (e) => {
@@ -39,7 +43,7 @@ export default function Header({ data: { addTask, sortOption, setSortOption } })
           id="hideorshow"
           checked={sortOption.hideCompleted}
           onChange={(e) =>
-            setSortOption((prev) => ({
+            setSortOption((prev: Task) => ({
               ...prev,
               hideCompleted: e.target.checked,
             }))

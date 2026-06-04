@@ -1,25 +1,27 @@
+import type { Task, TaskContextType } from "./types/types"
+import { useState, useEffect } from "react"
+import { createContext } from "react"
 import Header from "./components/Header/Header"
 import TodoList from "./components/TodoList/TodoList"
-import { useState, useEffect } from "react"
-import type { Task } from "./types/types"
+
+export const TaskContext = createContext<TaskContextType | undefined>(undefined)
+// Move all Context-related code into a separate file later (under /src/context)
 
 export default function App() {
   const [todoData, setTodoData] = useState<Task[]>(() => {
     const savedData = localStorage.getItem("todoData")
     return savedData ? JSON.parse(savedData).map((task) => ({ ...task, timestamp: new Date(task.timestamp) })) : []
   })
-  const [sortOption, setSortOption] = useState(
-    () => {
-      const savedSort = localStorage.getItem("sortOption")
-      return JSON.parse(savedSort) || { sortBy: "newest-first", hideCompleted: false }
-    }
 
-    /*   { sortBy: "Newest first", hideCompleted: false } */
-  )
+  const [sortOption, setSortOption] = useState(() => {
+    const savedSort = localStorage.getItem("sortOption")
+    return JSON.parse(savedSort) || { sortBy: "newest-first", hideCompleted: false }
+  })
+
   const addTask = (newTask: Task) => {
     setTodoData((prev) => [...prev, newTask])
-    console.log(todoData)
   }
+
   const deleteTask = (id: string) => {
     setTodoData((prev) => prev.filter((task) => task.id !== id))
   }
@@ -50,8 +52,10 @@ export default function App() {
 
   return (
     <>
-      <Header data={{ addTask, sortOption, setSortOption }} />
-      <TodoList data={{ sortedData, deleteTask, editTask }} />
+      <TaskContext.Provider value={{ addTask, sortOption, setSortOption, sortedData, deleteTask, editTask }}>
+        <Header />
+        <TodoList />
+      </TaskContext.Provider>
     </>
   )
 }
