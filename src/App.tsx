@@ -10,7 +10,7 @@ export const TaskContext = createContext<TaskContextType | undefined>(undefined)
 export default function App() {
   const [todoData, setTodoData] = useState<Task[]>(() => {
     const savedData = localStorage.getItem("todoData")
-    return savedData ? JSON.parse(savedData).map((task) => ({ ...task, timestamp: new Date(task.timestamp) })) : []
+    return savedData ? JSON.parse(savedData).map((task: Task) => ({ ...task, timestamp: new Date(task.timestamp) })) : []
   })
 
   const [sortOption, setSortOption] = useState(() => {
@@ -39,9 +39,9 @@ export default function App() {
         case "z-to-a":
           return b.name.localeCompare(a.name)
         case "oldest-first":
-          return a.timestamp - b.timestamp
+          return a.timestamp.getDate() - b.timestamp.getDate()
         case "newest-first":
-          return b.timestamp - a.timestamp
+          return b.timestamp.getDate() - a.timestamp.getDate()
       }
     })
 
