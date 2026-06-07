@@ -4,9 +4,11 @@ import { useState } from "react"
 import { v4 as uuidv4 } from "uuid"
 import { useContext } from "react"
 import { TaskContext } from "../../App"
+import { ThemeContext } from "../../context/ThemeContext"
 
 export default function Header() {
   const { addTask, sortOption, setSortOption } = useContext(TaskContext)
+  const { theme, toggleTheme } = useContext(ThemeContext)
 
   const [newTaskName, setNewTaskName] = useState("")
 
@@ -24,7 +26,8 @@ export default function Header() {
 
   return (
     <header>
-      <h1>Header</h1>
+      <button onClick={() => toggleTheme()}>{theme === "light" ? "Switch to dark theme" : "Switch to light theme"}</button>
+      <h1>Not to do</h1>
       <form action="">
         <input type="text" onChange={(e) => setNewTaskName(e.target.value)} />
         <button type="submit" onClick={handleAddTask}>
@@ -38,7 +41,7 @@ export default function Header() {
         <option value="z-to-a">Z to A</option>
       </select>
       <label htmlFor="hideorshow">
-        Hide completed tasks:
+        Hide completed:
         <input
           type="checkbox"
           id="hideorshow"

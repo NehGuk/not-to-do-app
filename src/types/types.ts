@@ -5,6 +5,11 @@ export type Task = {
   id: string
 }
 
+export type ThemeContextType = {
+  theme: "light" | "dark"
+  toggleTheme: () => void
+}
+
 export type TaskContextType = {
   addTask: (newTask: Task) => void
   deleteTask: (id: string) => void

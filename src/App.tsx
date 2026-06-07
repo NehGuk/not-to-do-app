@@ -1,10 +1,12 @@
-import type { Task, TaskContextType } from "./types/types"
+import type { Task, TaskContextType, ThemeContextType } from "./types/types"
 import { useState, useEffect } from "react"
 import { createContext } from "react"
 import Header from "./components/Header/Header"
 import TodoList from "./components/TodoList/TodoList"
+import { ThemeProvider } from "./context/ThemeContext"
 
 export const TaskContext = createContext<TaskContextType | undefined>(undefined)
+
 // Move all Context-related code into a separate file later (under /src/context)
 
 export default function App() {
@@ -52,10 +54,12 @@ export default function App() {
 
   return (
     <>
-      <TaskContext.Provider value={{ addTask, sortOption, setSortOption, sortedData, deleteTask, editTask }}>
-        <Header />
-        <TodoList />
-      </TaskContext.Provider>
+      <ThemeProvider>
+        <TaskContext.Provider value={{ addTask, sortOption, setSortOption, sortedData, deleteTask, editTask }}>
+          <Header />
+          <TodoList />
+        </TaskContext.Provider>
+      </ThemeProvider>
     </>
   )
 }
