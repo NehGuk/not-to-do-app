@@ -77,6 +77,12 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
       id: uuidv4(),
     },
     {
+      name: "Don't underestimate human stupidity",
+      timestamp: new Date(),
+      completed: false,
+      id: uuidv4(),
+    },
+    {
       name: "Don't forget to put the garbage out",
       timestamp: new Date(),
       completed: false,
