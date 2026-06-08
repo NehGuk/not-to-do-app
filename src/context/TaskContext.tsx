@@ -1,5 +1,6 @@
 import type { Task, TaskContextType } from "../types/types"
 import { createContext, useState, useEffect } from "react"
+import { v4 as uuidv4 } from "uuid"
 
 // later: move Task context to a separate file?
 export const TaskContext = createContext<TaskContextType>({
@@ -13,10 +14,78 @@ export const TaskContext = createContext<TaskContextType>({
 
 export function TaskProvider({ children }: { children: React.ReactNode }) {
   // all task-related functionalities live here
+  const sampleDefaultTasks = [
+    {
+      name: "Don't eat too much chocolate",
+      timestamp: new Date(),
+      completed: false,
+      id: uuidv4(),
+    },
+    {
+      name: "Don't be nasty to people",
+      timestamp: new Date(),
+      completed: false,
+      id: uuidv4(),
+    },
+    {
+      name: "Don't spend too much money on coffee",
+      timestamp: new Date(),
+      completed: false,
+      id: uuidv4(),
+    },
+    {
+      name: "Don't assume you know everything",
+      timestamp: new Date(),
+      completed: false,
+      id: uuidv4(),
+    },
+    {
+      name: "Don't think those lights you saw last night were UFOs",
+      timestamp: new Date(),
+      completed: false,
+      id: uuidv4(),
+    },
+    {
+      name: "Don't ever say that Litago is better than Cocio",
+      timestamp: new Date(),
+      completed: false,
+      id: uuidv4(),
+    },
+    {
+      name: "Don't be too lazy",
+      timestamp: new Date(),
+      completed: false,
+      id: uuidv4(),
+    },
+    {
+      name: "Don't forget you're pretty much insignificant in the grand scheme of things",
+      timestamp: new Date(),
+      completed: false,
+      id: uuidv4(),
+    },
+    {
+      name: "Don't forget you're VERY important to a lot of people, though",
+      timestamp: new Date(),
+      completed: false,
+      id: uuidv4(),
+    },
+    {
+      name: "Don't forget to have a valid ticket when using public transport",
+      timestamp: new Date(),
+      completed: false,
+      id: uuidv4(),
+    },
+    {
+      name: "Don't forget to put the garbage out",
+      timestamp: new Date(),
+      completed: false,
+      id: uuidv4(),
+    },
+  ]
 
   const [todoData, setTodoData] = useState<Task[]>(() => {
     const savedData = localStorage.getItem("todoData")
-    return savedData ? JSON.parse(savedData).map((task: Task) => ({ ...task, timestamp: new Date(task.timestamp) })) : []
+    return savedData ? JSON.parse(savedData).map((task: Task) => ({ ...task, timestamp: new Date(task.timestamp) })) : sampleDefaultTasks
   })
 
   // task functions
