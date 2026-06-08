@@ -35,12 +35,6 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
       id: uuidv4(),
     },
     {
-      name: "Don't assume you know everything",
-      timestamp: new Date(),
-      completed: false,
-      id: uuidv4(),
-    },
-    {
       name: "Don't think those lights you saw last night were UFOs",
       timestamp: new Date(),
       completed: false,
