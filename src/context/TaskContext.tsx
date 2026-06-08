@@ -1,7 +1,7 @@
-// Move all the TaskContext-related code into this file later, from App.tsx, for better organisation and separation of concerns
 import type { Task, TaskContextType } from "../types/types"
 import { createContext, useState, useEffect } from "react"
 
+// later: move Task context to a separate file?
 export const TaskContext = createContext<TaskContextType>({
   addTask: () => {},
   deleteTask: () => {},
@@ -12,16 +12,14 @@ export const TaskContext = createContext<TaskContextType>({
 })
 
 export function TaskProvider({ children }: { children: React.ReactNode }) {
+  // all task-related functionalities live here
+
   const [todoData, setTodoData] = useState<Task[]>(() => {
     const savedData = localStorage.getItem("todoData")
     return savedData ? JSON.parse(savedData).map((task: Task) => ({ ...task, timestamp: new Date(task.timestamp) })) : []
   })
 
-  const [sortOption, setSortOption] = useState(() => {
-    const savedSort = localStorage.getItem("sortOption")
-    return savedSort ? JSON.parse(savedSort) : { sortBy: "newest-first", hideCompleted: false }
-  })
-
+  // task functions
   const addTask = (newTask: Task) => {
     setTodoData((prev) => [...prev, newTask])
   }
@@ -33,6 +31,12 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
   const editTask = (id: string, updatedTask: Task) => {
     setTodoData((prev) => prev.map((task) => (task.id === id ? { ...task, ...updatedTask } : task)))
   }
+
+  // filtering
+  const [sortOption, setSortOption] = useState(() => {
+    const savedSort = localStorage.getItem("sortOption")
+    return savedSort ? JSON.parse(savedSort) : { sortBy: "newest-first", hideCompleted: false }
+  })
 
   const sortedData = [...todoData]
     .filter((task) => !task.completed || !sortOption.hideCompleted)

@@ -1,6 +1,7 @@
 import type { ThemeContextType } from "../types/types"
 import { createContext, useState } from "react"
 
+// Later: move ThemeContext context to a separate file?
 export const ThemeContext = createContext<ThemeContextType>({
   theme: "light",
   toggleTheme: () => {},
