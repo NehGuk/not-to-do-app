@@ -1,5 +1,3 @@
-// Move all the ThemeContext-related code into this file later, from App.tsx, for better organisation and separation of concerns
-
 import type { ThemeContextType } from "../types/types"
 import { createContext, useState } from "react"
 

@@ -1,13 +1,13 @@
-import type { Task } from "../../types/types"
+import type { Task, TaskContextType } from "../../types/types"
 import type { MouseEvent } from "react"
 import { useState } from "react"
 import { v4 as uuidv4 } from "uuid"
 import { useContext } from "react"
-import { TaskContext } from "../../App"
+import { TaskContext } from "../../context/TaskContext"
 import { ThemeContext } from "../../context/ThemeContext"
 
 export default function Header() {
-  const { addTask, sortOption, setSortOption } = useContext(TaskContext)
+  const { addTask, sortOption, setSortOption } = useContext<TaskContextType>(TaskContext)
   const { theme, toggleTheme } = useContext(ThemeContext)
 
   const [newTaskName, setNewTaskName] = useState("")
@@ -47,7 +47,7 @@ export default function Header() {
           id="hideorshow"
           checked={sortOption.hideCompleted}
           onChange={(e) =>
-            setSortOption((prev: Task) => ({
+            setSortOption((prev) => ({
               ...prev,
               hideCompleted: e.target.checked,
             }))
