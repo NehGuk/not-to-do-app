@@ -1,15 +1,18 @@
-/* import type { Task } from "../../types/types" */
+import type { Task } from "../../types/types"
+import { useContext } from "react"
+import { TaskContext } from "../../context/TaskContext"
 import TodoItem from "../TodoItem/TodoItem"
 
-export default function TodoList({ data: { sortedData, deleteTask, editTask } }) {
+export default function TodoList() {
+  const { sortedData } = useContext(TaskContext)
   if (sortedData.length === 0) {
     return <p>No tasks.</p>
   }
 
   return (
     <ul>
-      {sortedData.map((task) => {
-        return <TodoItem key={task.id} data={{ task, deleteTask, editTask }} />
+      {sortedData.map((task: Task) => {
+        return <TodoItem key={task.id} task={task} />
       })}
     </ul>
   )

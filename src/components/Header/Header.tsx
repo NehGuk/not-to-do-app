@@ -1,11 +1,17 @@
-import type { Task } from "../../types/types"
-import { useState } from "react"
+import type { Task, TaskContextType } from "../../types/types"
+import type { MouseEvent } from "react"
+import { useState, useContext } from "react"
+import { TaskContext } from "../../context/TaskContext"
+import { ThemeContext } from "../../context/ThemeContext"
 import { v4 as uuidv4 } from "uuid"
 
-export default function Header({ data: { addTask, sortOption, setSortOption } }) {
+export default function Header() {
+  const { addTask, sortOption, setSortOption } = useContext<TaskContextType>(TaskContext)
+  const { theme, toggleTheme } = useContext(ThemeContext)
+
   const [newTaskName, setNewTaskName] = useState("")
 
-  const handleAddTask = (e) => {
+  const handleAddTask = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
 
     const newTask: Task = {
@@ -19,7 +25,8 @@ export default function Header({ data: { addTask, sortOption, setSortOption } })
 
   return (
     <header>
-      <h1>Header</h1>
+      <button onClick={() => toggleTheme()}>{theme === "light" ? "Switch to dark theme" : "Switch to light theme"}</button>
+      <h1>Not to do</h1>
       <form action="">
         <input type="text" onChange={(e) => setNewTaskName(e.target.value)} />
         <button type="submit" onClick={handleAddTask}>
@@ -33,7 +40,7 @@ export default function Header({ data: { addTask, sortOption, setSortOption } })
         <option value="z-to-a">Z to A</option>
       </select>
       <label htmlFor="hideorshow">
-        Hide completed tasks:
+        Hide completed:
         <input
           type="checkbox"
           id="hideorshow"
