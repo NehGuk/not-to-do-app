@@ -25,7 +25,6 @@ export default function Header() {
 
   return (
     <header>
-      <p>{theme}</p>
       <select value={theme} onChange={(e) => setTheme(e.target.value as "light" | "dark" | "capuccino")}>
         <option value="light">Light</option>
         <option value="dark">Dark</option>
