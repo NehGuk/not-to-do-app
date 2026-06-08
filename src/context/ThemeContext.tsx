@@ -5,6 +5,7 @@ import { createContext, useState } from "react"
 export const ThemeContext = createContext<ThemeContextType>({
   theme: "light",
   toggleTheme: () => {},
+  setTheme: () => {},
 })
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
@@ -14,5 +15,5 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setTheme((prev) => (prev === "light" ? "dark" : "light"))
   }
 
-  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>
+  return <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>{children}</ThemeContext.Provider>
 }

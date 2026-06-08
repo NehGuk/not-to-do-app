@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from "uuid"
 
 export default function Header() {
   const { addTask, sortOption, setSortOption } = useContext<TaskContextType>(TaskContext)
-  const { theme, toggleTheme } = useContext(ThemeContext)
+  const { theme, setTheme } = useContext(ThemeContext)
 
   const [newTaskName, setNewTaskName] = useState("")
 
@@ -25,7 +25,12 @@ export default function Header() {
 
   return (
     <header>
-      <button onClick={() => toggleTheme()}>{theme === "light" ? "Switch to dark theme" : "Switch to light theme"}</button>
+      <p>{theme}</p>
+      <select value={theme} onChange={(e) => setTheme(e.target.value as "light" | "dark" | "capuccino")}>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="capuccino">Capuccino</option>
+      </select>
       <h1>Not to do</h1>
       <form action="">
         <input type="text" onChange={(e) => setNewTaskName(e.target.value)} />

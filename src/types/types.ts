@@ -18,6 +18,7 @@ export type TaskContextType = {
 
 export type ThemeContextType = {
   theme: "light" | "dark"
+  setTheme: Dispatch<SetStateAction<"light" | "dark" | "capuccino">>
   toggleTheme: () => void
 }
 
