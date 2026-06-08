@@ -14,6 +14,7 @@ export const TaskContext = createContext<TaskContextType>({
 
 export function TaskProvider({ children }: { children: React.ReactNode }) {
   // all task-related functionalities live here
+
   const sampleDefaultTasks = [
     {
       name: "Don't eat too much chocolate",
@@ -90,7 +91,7 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
 
   // task functions
   const addTask = (newTask: Task) => {
-    setTodoData((prev) => [...prev, newTask])
+    setTodoData((prev) => [newTask, ...prev])
   }
 
   const deleteTask = (id: string) => {
