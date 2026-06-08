@@ -1,6 +1,6 @@
 // Move all the TaskContext-related code into this file later, from App.tsx, for better organisation and separation of concerns
-import { createContext, useState, useEffect } from "react"
 import type { Task, TaskContextType } from "../types/types"
+import { createContext, useState, useEffect } from "react"
 
 export const TaskContext = createContext<TaskContextType>({
   addTask: () => {},

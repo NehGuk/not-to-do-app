@@ -1,7 +1,7 @@
 import type { Task } from "../../types/types"
-import TodoItem from "../TodoItem/TodoItem"
 import { useContext } from "react"
 import { TaskContext } from "../../context/TaskContext"
+import TodoItem from "../TodoItem/TodoItem"
 
 export default function TodoList() {
   const { sortedData } = useContext(TaskContext)

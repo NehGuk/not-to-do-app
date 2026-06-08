@@ -1,10 +1,9 @@
 import type { Task, TaskContextType } from "../../types/types"
 import type { MouseEvent } from "react"
-import { useState } from "react"
-import { v4 as uuidv4 } from "uuid"
-import { useContext } from "react"
+import { useState, useContext } from "react"
 import { TaskContext } from "../../context/TaskContext"
 import { ThemeContext } from "../../context/ThemeContext"
+import { v4 as uuidv4 } from "uuid"
 
 export default function Header() {
   const { addTask, sortOption, setSortOption } = useContext<TaskContextType>(TaskContext)
